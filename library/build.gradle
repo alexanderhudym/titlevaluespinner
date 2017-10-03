@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
@@ -21,6 +22,24 @@ android {
     }
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+publish {
+    bintrayUser = properties.getProperty("bintray.username")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    userOrg = 'onyx'
+    groupId = 'ua.com.onyx'
+    artifactId = 'title-value-spinner'
+    uploadName = 'TitleValueSpinner'
+    publishVersion = '0.1'
+    desc = 'Initial version'
+    website = 'https://github.com/alexanderhudym/titlevaluespinner'
+    dryRun = 'false'
+}
+
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -29,3 +48,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
 }
+

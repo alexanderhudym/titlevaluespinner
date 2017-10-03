@@ -136,7 +136,6 @@ public class TitleValueSpinner extends RelativeLayout {
 
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -172,6 +171,46 @@ public class TitleValueSpinner extends RelativeLayout {
     public void setImage(Drawable image) {
         this.image = image;
         imageView.setImageDrawable(image);
+    }
+
+    public void setTitleTextColor(int titleTextColor) {
+        this.titleTextColor = titleTextColor;
+        titleView.setTextColor(titleTextColor);
+    }
+
+    public void setValueTextColor(int valueTextColor) {
+        this.valueTextColor = valueTextColor;
+        valueView.setTextColor(valueTextColor);
+    }
+
+    public void setTitleTextSize(int titleTextSize) {
+        this.titleTextSize = titleTextSize;
+        titleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
+    }
+
+    public void setValueTextSize(int valueTextSize) {
+        this.valueTextSize = valueTextSize;
+        valueView.setTextSize(TypedValue.COMPLEX_UNIT_PX, valueTextSize);
+    }
+
+    public void setBottomLineColor(int bottomLineColor) {
+        this.bottomLineColor = bottomLineColor;
+        bottomLineView.setBackgroundColor(bottomLineColor);
+    }
+
+    public void setBottomLineHeight(int bottomLineHeight) {
+        this.bottomLineHeight = bottomLineHeight;
+        LayoutParams bottomLineLP = (LayoutParams) bottomLineView.getLayoutParams();
+        bottomLineLP.height = bottomLineHeight;
+        bottomLineView.setLayoutParams(bottomLineLP);
+    }
+
+    public void setImageSize(int imageSize) {
+        this.imageSize = imageSize;
+        LayoutParams imageLP = (LayoutParams) imageView.getLayoutParams();
+        imageLP.width = imageSize;
+        imageLP.height = imageSize;
+        imageView.setLayoutParams(imageLP);
     }
 
     @Deprecated

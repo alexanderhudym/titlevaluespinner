@@ -7,8 +7,18 @@
     tools:context="ua.com.onyx.titlevaluespinnerexample.MainActivity">
 
     <ua.com.onyx.titlevaluespinner.TitleValueSpinner
-        android:layout_margin="20dp"
         app:title="Title"
+        app:value="Value 1"
+        app:values="@array/values"
+        app:titleTextSize="@dimen/title_value_spinner_title_text_size"
+        app:valueTextSize="@dimen/title_value_spinner_value_text_size"
+        app:titleTextColor="@color/title_value_spinner_title_text_color"
+        app:valueTextColor="@color/title_value_spinner_value_text_color"
+        app:bottomLineColor="@color/title_value_spinner_bottom_line_color"
+        app:bottomLineHeight="@dimen/title_value_spinner_bottom_line_height"
+        app:imageSize="@dimen/title_value_spinner_image_size"
+        app:image="@drawable/ic_arrow_drop_down"
+        android:layout_margin="20dp"
         android:id="@+id/title_value_spinner"
         android:layout_width="match_parent"
         android:layout_height="40dp"/>

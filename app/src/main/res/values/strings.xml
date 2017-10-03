@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TitleValueSpinner</string>
+    <string-array name="values">
+        <item>Value 1</item>
+        <item>Value 2</item>
+        <item>Value 3</item>
+    </string-array>
 </resources>
