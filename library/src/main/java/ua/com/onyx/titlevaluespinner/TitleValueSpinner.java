@@ -76,6 +76,9 @@ public class TitleValueSpinner extends RelativeLayout {
             title = typedArray.getString(R.styleable.TitleValueSpinner_title);
             value = typedArray.getString(R.styleable.TitleValueSpinner_value);
             image = typedArray.getDrawable(R.styleable.TitleValueSpinner_image);
+            if (image == null) {
+                image = ContextCompat.getDrawable(context, R.drawable.ic_arrow_drop_down);
+            }
             imageSize = typedArray.getDimensionPixelSize(R.styleable.TitleValueSpinner_imageSize,
                     getResources().getDimensionPixelSize(R.dimen.title_value_spinner_image_size));
             titleTextColor = typedArray.getColor(R.styleable.TitleValueSpinner_titleTextColor,
