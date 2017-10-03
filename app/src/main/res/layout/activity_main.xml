@@ -7,6 +7,8 @@
     tools:context="ua.com.onyx.titlevaluespinnerexample.MainActivity">
 
     <ua.com.onyx.titlevaluespinner.TitleValueSpinner
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:title="Title"
         android:layout_gravity="center"
         android:id="@+id/title_value_spinner"
