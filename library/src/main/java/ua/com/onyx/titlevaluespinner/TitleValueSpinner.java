@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 /**
  * Created by Alexander on 02.10.17.
@@ -46,6 +43,9 @@ public class TitleValueSpinner extends RelativeLayout {
     private TitleValueSpinnerAdapter titleValueSpinnerAdapter;
 
     private OnSelectListener onSelectListener;
+    private OnPreShowListener onPreShowListener;
+    private OnShowListener onShowListener;
+    private OnDismissListener onDismissListener;
 
     public TitleValueSpinner(Context context) {
         super(context);
@@ -136,14 +136,14 @@ public class TitleValueSpinner extends RelativeLayout {
 
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = MeasureSpec.getSize(heightMeasureSpec);
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+//        int width = MeasureSpec.getSize(widthMeasureSpec);
+//        int height = MeasureSpec.getSize(heightMeasureSpec);
+//        setMeasuredDimension(width, height);
+//    }
 
     public void setOnSelectListener(OnSelectListener onSelectListener) {
         this.onSelectListener = onSelectListener;
@@ -213,6 +213,31 @@ public class TitleValueSpinner extends RelativeLayout {
         imageView.setLayoutParams(imageLP);
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public String[] getValues() {
+        return values;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setOnShowListener(OnShowListener onShowListener) {
+        this.onShowListener = onShowListener;
+    }
+
+    public void setOnPreShowListener(OnPreShowListener onPreShowListener) {
+        this.onPreShowListener = onPreShowListener;
+    }
+
+    public void setOnDismissListener(OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+
     @Deprecated
     @Override
     public void setOnClickListener(@Nullable OnClickListener l) {
@@ -222,13 +247,17 @@ public class TitleValueSpinner extends RelativeLayout {
     @Override
     public boolean performClick() {
         if (!isShowing) {
+
             show();
-            return true;
+
         }
         return super.performClick();
     }
 
     public void show() {
+        if (onPreShowListener != null && !onPreShowListener.onPreShow(this)) {
+            return;
+        }
         if (dialog == null) {
             dialog = new AlertDialog.Builder(getContext())
                     .setSingleChoiceItems(titleValueSpinnerAdapter, indexOf(value), new DialogInterface.OnClickListener() {
@@ -249,17 +278,23 @@ public class TitleValueSpinner extends RelativeLayout {
                         @Override
                         public void onDismiss(DialogInterface dialogInterface) {
                             isShowing = false;
+                            if (onDismissListener != null) {
+                                onDismissListener.onDismiss(TitleValueSpinner.this);
+                            }
                         }
                     })
                     .create();
         }
         dialog.show();
         isShowing = true;
+        if (onShowListener != null) {
+            onShowListener.onShow(this);
+        }
     }
 
-    public void hide() {
+    public void dismiss() {
         if (dialog != null) {
-            dialog.hide();
+            dialog.dismiss();
         }
         isShowing = false;
     }
@@ -306,6 +341,7 @@ public class TitleValueSpinner extends RelativeLayout {
 
     }
 
+
     private int indexOf(String value) {
         for (int i = 0; i < values.length; i++) {
             if (values[i].equals(value)) {
@@ -319,4 +355,23 @@ public class TitleValueSpinner extends RelativeLayout {
         void onSelect(TitleValueSpinner titleValueSpinner, String[] values, String value);
     }
 
+    public interface OnPreShowListener {
+        boolean onPreShow(TitleValueSpinner titleValueSpinner);
+    }
+
+    public interface OnShowListener {
+        void onShow(TitleValueSpinner titleValueSpinner);
+    }
+
+    public interface OnDismissListener {
+        void onDismiss(TitleValueSpinner titleValueSpinner);
+    }
+
+
+
+
+
 }
+
+
+

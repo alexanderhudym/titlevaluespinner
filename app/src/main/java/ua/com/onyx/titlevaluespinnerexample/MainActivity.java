@@ -2,8 +2,10 @@ package ua.com.onyx.titlevaluespinnerexample;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import ua.com.onyx.titlevaluespinner.TitleValueSpinner;
 
@@ -35,6 +37,27 @@ public class MainActivity extends AppCompatActivity {
         titleValueSpinner.setOnSelectListener(new TitleValueSpinner.OnSelectListener() {
             @Override
             public void onSelect(TitleValueSpinner titleValueSpinner, String[] values, String value) {
+
+            }
+        });
+
+        titleValueSpinner.setOnPreShowListener(new TitleValueSpinner.OnPreShowListener() {
+            @Override
+            public boolean onPreShow(TitleValueSpinner titleValueSpinner) {
+                return false; //or true if you want to show dialog
+            }
+        });
+
+        titleValueSpinner.setOnShowListener(new TitleValueSpinner.OnShowListener() {
+            @Override
+            public void onShow(TitleValueSpinner titleValueSpinner) {
+
+            }
+        });
+
+        titleValueSpinner.setOnDismissListener(new TitleValueSpinner.OnDismissListener() {
+            @Override
+            public void onDismiss(TitleValueSpinner titleValueSpinner) {
 
             }
         });
