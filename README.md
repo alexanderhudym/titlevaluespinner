@@ -65,3 +65,4 @@ Spinner which shows the current value
 * Dropdown mode
 * Custom values adapter
 * More customizables
+* Add middleware on show event
