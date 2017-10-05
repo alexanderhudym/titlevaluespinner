@@ -34,7 +34,7 @@ Spinner which shows the current value
 * Java
 
 ```
-		String[] values = {
+	String[] values = {
                 "Value 1",
                 "Value 2",
                 "Value 3"
@@ -58,6 +58,27 @@ Spinner which shows the current value
 
             }
         });
+
+        titleValueSpinner.setOnPreShowListener(new TitleValueSpinner.OnPreShowListener() {
+            @Override
+            public boolean onPreShow(TitleValueSpinner titleValueSpinner) {
+                return false; //or true if you want to show dialog
+            }
+        });
+        
+        titleValueSpinner.setOnShowListener(new TitleValueSpinner.OnShowListener() {
+            @Override
+            public void onShow(TitleValueSpinner titleValueSpinner) {
+                
+            }
+        });
+        
+        titleValueSpinner.setOnDismissListener(new TitleValueSpinner.OnDismissListener() {
+            @Override
+            public void onDismiss(TitleValueSpinner titleValueSpinner) {
+                
+            }
+        });
 ```
 
 ## Evolution
@@ -65,3 +86,4 @@ Spinner which shows the current value
 * Dropdown mode
 * Custom values adapter
 * More customizables
+* Add middleware on show event
